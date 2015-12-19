@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block body %}
+      <div class="row">
+    <form class="col s12" action="login" method="post">
+
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="text" class="validate">
+          <label for="password">ID</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="password" class="validate">
+          <label for="email">Password</label>
+        </div>
+      </div>
+
+        <div class="row" style="height: auto; max-width: 100%;" align="right">
+        <a href="signup" class="waves-effect waves-light btn"><i class="material-icons right">cloud</i>Signup</a>
+
+            <button class="btn waves-effect waves-light" type="submit" name="action">Login
+    <i class="material-icons right">send</i>
+  </button>
+
+        </div>
+
+    </form>
+  </div>
+{% endblock %}
+

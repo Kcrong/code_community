@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link type="text/css" rel="stylesheet" href="/css/materialize.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="/css/ghpages-materialize.css" media="screen,projection"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+
+        <style>
+            #profile_img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 40%;
+            }
+
+            #card_container {
+                padding-left: 10%;
+                padding-right: 10%;
+            }
+
+            #subtitle {
+                height: auto;
+                width: 100%;
+                text-align: center;
+            }
+
+
+        </style>
+
+
+	</head>
+
+	<body>
+		<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.js"></script>
+		<script type="text/javascript" src="/js/materialize.js"></script>
+		
+		<div class="row">
+            <!-- Navigation Bar -->
+
+
+
+            <ul style="left: 0px;" id="nav-mobile" class="side-nav fixed">
+                <li class="logo"><a href="/home" id="logo-container" href="#" class="brand-logo">
+                    <img id="profile_img" src="/img/crong.jpg">
+                </a></li>
+
+                <div style="margin-top: 70%"></div>
+
+                <li class="search" style="margin-top: 27%">
+                  <div class="search-wrapper card" onclick="need_fix()">
+                      <input id="search" disabled="True"><i class="material-icons" type="submit">search</i>
+
+                    <div class="search-results"></div>
+                  </div>
+                </li>
+                <li class="bold"><a href="/" class="waves-effect waves-teal">CodeLine</a></li>
+                <li class="bold"><a href="/user/login" class="waves-effect waves-teal">Login</a></li>
+                <li class="bold"><a href="/user/home" class="waves-effect waves-teal">Edit Profile</a></li>
+                <li class="bold"><a href="#" class="waves-effect waves-teal" onclick="need_fix()">About Admin</a></li>
+            </ul>
+
+
+
+
+            <div id="subtitle" style="position: fixed; z-index: 10; background-color: white">
+                <h3><img src="/img/logo.png"> </h3>
+            </div>
+        <!-- for protect content because of subtitle -->
+            <div style="height: 120px"></div>
+
+        <div class="row">
+
+			<div id="card_container" class="container">
+
+
+
+
+            {% block body %}
+            {% endblock %}
+
+            </div>
+
+
+
+
+
+
+
+
+        </div>
+		</div>
+
+
+	</body>
+
+    <script>
+        function need_fix() {
+            alert('추가중 입니다 ㅜㅜ');
+        }
+    </script>
+</html>

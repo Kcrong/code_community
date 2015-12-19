@@ -1,8 +1,20 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from flask import Flask, send_from_directory
+from flask.ext.sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+
+def create_app():
+    app = Flask(__name__)
+    from main import main_blueprint
+    from user import user_blueprint
+    app.register_blueprint(main_blueprint)
+    app.register_blueprint(user_blueprint, url_prefix='/user')
+    return app
+
+
+app = create_app()
+db = SQLAlchemy(app).init_app(app)
 
 
 @app.route('/css/<path:filename>')
@@ -23,9 +35,3 @@ def img_static(filename):
 @app.route('/font/<path:filename>')
 def font_static(filename):
     return send_from_directory(app.root_path + '/static/font', filename)
-
-
-def create_app():
-    from main import main_blueprint
-    app.register_blueprint(main_blueprint)
-    return app

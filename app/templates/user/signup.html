@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="row">
+<form class="col s12" action="signup" method="post">
+  <div class="row">
+    <div class="input-field col s6">
+      <input name="userid" id="first_name" type="text" class="validate"> <!-- placeholder="Placeholder" -->
+      <label for="first_name">ID</label>
+    </div>
+    <div class="input-field col s6">
+      <input name="nickname" id="last_name" type="text" class="validate">
+      <label for="last_name">Nickname</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input name="password" id="password" type="password" class="validate">
+      <label for="password">Password</label>
+    </div>
+  </div>
+  <div class="row">
+    <div class="input-field col s12">
+      <input name="email" id="email" type="email" class="validate">
+      <label for="email" data-error="Typo?" data-success="Pass :)">Email</label>
+    </div>
+  </div>
+
+    <!-- Check Box Start -->
+    <div class="row">
+        <div class="input-field col s12">
+        <select name="job">
+          <option value="" disabled selected>Choose your Job</option>
+          <option value="1">Student</option>
+          <option value="2">Developer</option>
+          <option value="3">Teacher</option>
+        </select>
+        <label>Job</label>
+      </div>
+    </div>
+
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>Profile Image</span>
+        <input type="file" name="profile_img">
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+    <div class="row" style="height: auto; max-width: 100%;" align="right">
+   <button class="btn waves-effect waves-light" type="submit" name="action">Signup
+    <i class="material-icons right">send</i>
+  </button>
+        </div>
+
+</form>
+</div>
+
+    <script>
+    $(document).ready(function() {
+    $('select').material_select();
+  });
+    </script>
+
+
+{% endblock %}
