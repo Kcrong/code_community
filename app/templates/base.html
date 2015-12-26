@@ -30,6 +30,9 @@
 
         </style>
 
+        {% block head %}
+        {% endblock %}
+
 
 	</head>
 
@@ -59,14 +62,14 @@
                 <li class="bold"><a href="/" class="waves-effect waves-teal">CodeLine</a></li>
                 <li class="bold"><a href="/user/login" class="waves-effect waves-teal">Login</a></li>
                 <li class="bold"><a href="/user/home" class="waves-effect waves-teal">Edit Profile</a></li>
-                <li class="bold"><a href="#" class="waves-effect waves-teal" onclick="need_fix()">About Admin</a></li>
+                <li class="bold"><a href="http://portfolio.kim82536.pe.kr" class="waves-effect waves-teal">About Admin</a></li>
             </ul>
 
 
 
 
             <div id="subtitle" style="position: fixed; z-index: 10; background-color: white">
-                <h3><img src="/img/logo.png"> </h3>
+                <h3><img src="/img/logo.png" style="height: 60px"> </h3>
             </div>
         <!-- for protect content because of subtitle -->
             <div style="height: 120px"></div>
@@ -80,6 +83,24 @@
 
             {% block body %}
             {% endblock %}
+
+            <!-- fixed circle icon start  -->
+
+
+<div style="position: fixed; right: 10px;bottom: 10px;">
+                <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large mdi-navigation-menu"></i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red" href="/"><i class="material-icons">question_answer</i></a></li>
+      <li><a class="btn-floating yellow darken-1" href="/article/write"><i class="material-icons">format_quote</i></a></li>
+      <li><a class="btn-floating green" href="/user/home"><i class="material-icons">settings</i></a></li>
+      <li><a class="btn-floating blue" href="/user/login"><i class="material-icons">power_settings_new</i></a></li>
+    </ul>
+  </div>
+
+            </div>
 
             </div>
 
