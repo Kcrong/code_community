@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 from flask import render_template
+from sqlalchemy import desc
 
 from . import main_blueprint
+from .. import db
+from ..article.models import Article
 
 
 @main_blueprint.route('/')
 def index():
-
     test_code = """#include <iostream>
 #define IABS(x) ((x) < 0 ? -(x) : (x))
 
@@ -24,7 +26,8 @@ int main(int argc, char *argv[]) {
   return -2e3 + 12l;
 }"""
 
+    db_data=db.session.query(Article).order_by(desc(Article.id)).all()
+
     return render_template('main/index.html',
-                           testing=range(0, 8),
-                           testcode=test_code
+                           Alldata=db_data
                            )

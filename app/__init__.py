@@ -2,11 +2,13 @@
 # -*- coding:utf-8 -*-
 from flask import Flask, send_from_directory
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.migrate import Migrate
+
+app = Flask(__name__)
+db = SQLAlchemy()
 
 
 def create_app():
-    app = Flask(__name__)
-
     from main import main_blueprint
     from user import user_blueprint
     from article import article_blueprint
@@ -14,11 +16,22 @@ def create_app():
     app.register_blueprint(main_blueprint)
     app.register_blueprint(user_blueprint, url_prefix='/user')
     app.register_blueprint(article_blueprint, url_prefix='/article')
+
+    app.config.from_pyfile('../config.cfg')
     return app
 
 
 app = create_app()
 db = SQLAlchemy(app).init_app(app)
+
+from article.models import *
+from main.models import *
+from user.models import *
+import article.models
+import main.models
+import user.models
+
+migrate = Migrate(app, db)
 
 
 @app.route('/css/<path:filename>')

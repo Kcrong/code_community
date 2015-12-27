@@ -1,32 +1,40 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/styles/default.min.css">
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.0.0/highlight.js"></script>
+    <link rel="stylesheet" href="/css/default.css">
+    <script src="/js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script>initHighlightingOnLoad();</script>
 {% endblock %}
 
 {% block body %}
-{% for i in testing %}
+{% for data in Alldata %}
     <div>
+    <h5>{{ data.title }}</h5>
         <div>
-            <pre><code>{{ testcode }}</code></pre>
+            <pre><code>{{ data.code }}</code></pre>
         </div>
             <div class="row" style="padding-top: 10px;">
                 <div class="col s6">
-                    This Is My COde.
+                    {% if data.content|length >= 80 %}
+                        <span id='long_content_preview{{ data.id }}'>{{ data.content[:30] }}</span>
+                    <a onclick="this.nextSibling.style.display='block';this.innerHTML='';document.getElementById('long_content_preview{{ data.id }}').innerHTML=''"; href='javascript:void(0)'>More</a><DIV style='display:none'>
+                        {{ data.content }}
+                    <a onclick="this.parentNode.style.display='none';this.parentNode.previousSibling.innerHTML='More';document.getElementById('long_content_preview{{ data.id }}').innerHTML='{{ data.content[:30] }}'" href=javascript:void(0)><br>Close</a></DIV>
+                    {% else %}
+                    {{ data.content }}
+
+                    {% endif %}
                 </div>
                 <div class="col s6" align="right">
                         <a class="waves-effect waves-light btn"><i class="material-icons left">thumb_up</i>Like</a>
-                        <a class="waves-effect waves-light btn modal-trigger" href="#comment{{ i }}"><i class="material-icons left">view_headline</i>Comment</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="#comment{{ data.id }}"><i class="material-icons left">view_headline</i>Comment</a>
                 </div>
             </div>
     </div>
 
     <script>
         $(document).ready(function(){
-        $('.comment{{ i }}').leanModal();
+        $('.comment{{ data.id }}').leanModal();
   });
 
     </script>
@@ -37,7 +45,13 @@
     <div class="modal-content">
       <h4>Modal Header Content</h4>
       <p>This code is really bad</p>
+
+        <h4>Modal Header Content</h4>
+      <p>This code is really bad</p>
     </div>
+
+
+
     <div class="modal-footer">
       <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
     </div>
@@ -55,6 +69,7 @@
   });
 
     </script>
+
 
 {% endblock %}
 

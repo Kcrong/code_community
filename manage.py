@@ -1,12 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from flask.ext.script import Manager
-
+from app import migrate
+from flask.ext.migrate import MigrateCommand
 # from werkzeug.contrib.fixers import ProxyFix
 
 from app import app
 
 manager = Manager(app)
+
+manager.add_command('db', MigrateCommand)
 
 
 @manager.command
