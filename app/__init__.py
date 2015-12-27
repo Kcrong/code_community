@@ -6,7 +6,7 @@ from flask.ext.migrate import Migrate
 
 app = Flask(__name__)
 db = SQLAlchemy()
-
+static_folder = app.root_path + '/static'
 
 def create_app():
     from main import main_blueprint

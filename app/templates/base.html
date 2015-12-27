@@ -8,7 +8,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 
-
         <style>
             #profile_img {
                 max-width: 100%;
@@ -47,12 +46,21 @@
 
             <ul style="left: 0px;" id="nav-mobile" class="side-nav fixed">
                 <li class="logo"><a href="/home" id="logo-container" href="#" class="brand-logo">
-                    <img id="profile_img" src="/img/crong.jpg">
+                    {% if login %}
+                    <img id="profile_img" class="responsive-img" src="/img/profile/{{ userdata['profile_img'] }}">
+                    {% else %}
+                    <img id="profile_img" class="responsive-img" src="/img/profile/default.jpg">
+                    {% endif %}
+                    {% if login %}
+                    <h5>{{ userdata['nickname'] }}</h5>
+                    {% else %}
+                    <h5>Guest</h5>
+                    {% endif %}
                 </a></li>
 
-                <div style="margin-top: 70%"></div>
+                <div style="margin-top: 110%"></div>
 
-                <li class="search" style="margin-top: 27%">
+                <li class="search" style="margin-top: 70%">
                   <div class="search-wrapper card" onclick="need_fix()">
                       <input id="search" disabled="True"><i class="material-icons" type="submit">search</i>
 
@@ -60,8 +68,13 @@
                   </div>
                 </li>
                 <li class="bold"><a href="/" class="waves-effect waves-teal">CodeLine</a></li>
-                <li class="bold"><a href="/user/login" class="waves-effect waves-teal">Login</a></li>
+
+                {% if login %}
+                <li class="bold"><a href="/user/logout" class="waves-effect waves-teal">Logout</a></li>
                 <li class="bold"><a href="/user/home" class="waves-effect waves-teal">Edit Profile</a></li>
+                {% else %}
+                <li class="bold"><a href="/user/login" class="waves-effect waves-teal">Login</a></li>
+                {% endif %}
                 <li class="bold"><a href="http://portfolio.kim82536.pe.kr" class="waves-effect waves-teal">About Admin</a></li>
             </ul>
 
@@ -122,4 +135,5 @@
             alert('추가중 입니다 ㅜㅜ');
         }
     </script>
+
 </html>

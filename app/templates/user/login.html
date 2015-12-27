@@ -1,18 +1,19 @@
 {% extends "base.html" %}
 
 {% block body %}
+        <text style="color: red">{{ error }}</text>
       <div class="row">
     <form class="col s12" action="login" method="post">
 
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="text" class="validate">
+          <input name="userid" id="password" type="text" class="validate">
           <label for="password">ID</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="password" class="validate">
+          <input name="password" id="email" type="password" class="validate">
           <label for="email">Password</label>
         </div>
       </div>

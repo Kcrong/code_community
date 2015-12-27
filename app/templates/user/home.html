@@ -2,17 +2,17 @@
 
 {% block body %}
     <div align="center" style="width: 100%; padding-bottom: 20px">
-        <img src="/img/crong.jpg" class="responsive-img">
+        <img src="/img/profile/{{ userdata['profile_img'] }}" class="responsive-img">
     </div>
 
     <form class="col s12" action="signup" method="post">
   <div class="row">
     <div class="input-field col s6">
-      <input name="userid"  value="hyunwoo" id="first_name" type="text" class="validate">
+      <input name="userid"  value="{{ userdata['userid'] }}" id="first_name" type="text" class="validate">
       <label for="first_name">ID</label>
     </div>
     <div class="input-field col s6">
-      <input name="nickname" value="kcrong" id="last_name" type="text" class="validate">
+      <input name="nickname" value="{{ userdata['nickname'] }}" id="last_name" type="text" class="validate">
       <label for="last_name">Nickname</label>
     </div>
   </div>
@@ -30,7 +30,7 @@
   </div>
   <div class="row">
     <div class="input-field col s12">
-      <input name="email" value="kcrong@kim82536.pe.kr" id="email" type="email" class="validate">
+      <input name="email" value="{{ userdata['email'] }}" id="email" type="email" class="validate">
       <label for="email" data-error="Typo?" data-success="Pass :)">Email</label>
     </div>
   </div>
@@ -39,7 +39,7 @@
     <script>
     $(function() {
         <!-- select default -->
-    $("#job").val("1");
+    $("#job").val("{{ userdata['job'] }}");
 });</script>
 
     <div class="row">
