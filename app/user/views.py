@@ -28,11 +28,11 @@ def user_main():
 
 @user_blueprint.route('/logout')
 def user_logout():
-    del (session['profile_img'])
-    del (session['nickname'])
-    del (session['userid'])
-    del (session['email'])
-    del (session['job'])
+    tmp = session.copy()
+    for i in tmp:
+        del (session[i])
+
+    del tmp
 
     session['login'] = False
 
@@ -99,12 +99,88 @@ def user_signup():
 
 @user_blueprint.route('/home')
 def user_home():
-    if not session['login']:
+    return redirect(url_for('user.user_mypage'))
+
+
+@user_blueprint.route('/mypage', methods=['GET', 'POST'])
+def user_mypage():
+    if request.method == 'GET':
+        try:
+            login = session['login']
+        except KeyError:
+            return redirect(url_for('user.user_login'))
+        else:
+            if not login:
+                return redirect(url_for('user.user_login'))
+
+        return render_template('user/home.html',
+                               login=login,
+                               userdata=session)
+
+    else:
+        data = request.form
+        u = db.session.query(Users).filter_by(userpw=data['before_password']).first()
+        if u is None:
+            return render_template('user/home.html',
+                                   userdata=session,
+                                   error="Wrong Password")
+
+
+        else:
+            profile_img = request.files['profile_img']
+            if profile_img.filename == '':
+                pass
+
+            else:
+                filename = profile_img.filename
+
+                if allowed_file(filename):
+                    filename = randomkey(len(filename)) + '.' + filename.rsplit('.', 1)[1]
+                    profile_img.save(static_folder + '/img/profile/' + filename)
+                    session['profile_img'] = filename
+                else:
+                    return render_template('user/home.html',
+                                           userdata=session,
+                                           error="Wrong Profile Image Extension")
+
+        try:
+            newpw = data['after_password']
+        except KeyError:
+            pass
+
+        u.job = data['job']
+        u.nickname = data['nickname']
+        u.email = data['email']
+
+        db.session.commit()
+
+        session['login'] = True
+        session['userid'] = u.userid
+        session['nickname'] = u.nickname
+        session['email'] = u.email
+        session['job'] = u.job
+
+        return render_template('user/home.html',
+                               login=True,
+                               userdata=session)
+
+
+@user_blueprint.route('/del_img')
+def del_profile_img():
+    try:
+        login = session['login']
+    except KeyError:
+        session['login'] = False
         return redirect(url_for('user.user_login'))
 
-    login = True
-    userdata = session
+    if not login:
+        return redirect(url_for('user.user_login'))
 
-    return render_template('user/home.html',
-                           login=login,
-                           userdata=userdata)
+    userid = session['userid']
+
+    u = db.session.query(Users).filter_by(userid=userid).first()
+    u.profile_img = "default.jpg"
+    session['profile_img'] = "default.jpg"
+    db.session.commit()
+
+    return redirect(url_for('user.user_home'))

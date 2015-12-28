@@ -1,14 +1,22 @@
 {% extends "base.html" %}
 
 {% block body %}
+    <text style="color: red">{{ error }}</text>
+    <br>
+
+    <div align="right">
+    <a class="waves-effect waves-light btn" href="del_img">Reset Profile Image</a>
+    </div>
+
     <div align="center" style="width: 100%; padding-bottom: 20px">
         <img src="/img/profile/{{ userdata['profile_img'] }}" class="responsive-img">
     </div>
 
-    <form class="col s12" action="signup" method="post">
+
+    <form class="col s12" action="mypage" method="post" enctype="multipart/form-data">
   <div class="row">
     <div class="input-field col s6">
-      <input name="userid"  value="{{ userdata['userid'] }}" id="first_name" type="text" class="validate">
+      <input disabled name="userid"  value="{{ userdata['userid'] }}" id="first_name" type="text" class="validate">
       <label for="first_name">ID</label>
     </div>
     <div class="input-field col s6">
@@ -71,6 +79,7 @@
         </div>
 
 </form>
+
 
     <script>
     $(document).ready(function() {
