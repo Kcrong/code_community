@@ -1,13 +1,13 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-from flask import render_template, redirect, url_for, request, session
 import random
 import string
 
+from flask import render_template, redirect, url_for, request, session
+from models import Users
+from sqlalchemy.exc import IntegrityError
 from . import user_blueprint
 from .. import static_folder, db
-
-from models import Users
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -119,7 +119,7 @@ def user_mypage():
 
     else:
         data = request.form
-        u = db.session.query(Users).filter_by(userpw=data['before_password']).first()
+        u = db.session.query(Users).filter_by(userid=session['userid'], userpw=data['before_password']).first()
         if u is None:
             return render_template('user/home.html',
                                    userdata=session,
@@ -151,8 +151,15 @@ def user_mypage():
         u.job = data['job']
         u.nickname = data['nickname']
         u.email = data['email']
-
-        db.session.commit()
+        try:
+            db.session.commit()
+        except IntegrityError, e:
+            db.session.rollback()
+            error = e[0].split('for key')[1].split("\'")[1]
+            return render_template('user/home.html',
+                                   login=True,
+                                   userdata=session,
+                                   error=error + ' is same with other user!')
 
         session['login'] = True
         session['userid'] = u.userid

@@ -3,7 +3,6 @@
 
 from .. import db
 
-
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     userid = db.Column(db.String(30), nullable=False, unique=True)
@@ -12,6 +11,8 @@ class Users(db.Model):
     email = db.Column(db.String(30), unique=True)
     job = db.Column(db.Integer)
     profile_img = db.Column(db.String(30), unique=True)
+    article = db.relationship('Article', lazy='dynamic', backref='Users')
+    answer = db.relationship('Answer', lazy='dynamic', backref='Users')
 
     def __init__(self, userid, userpw, nickname, email, job, profile_img):
         self.userid = userid
@@ -20,3 +21,9 @@ class Users(db.Model):
         self.email = email
         self.job = job
         self.profile_img = profile_img
+
+    def __unicode__(self):
+        return self.nickname
+
+    def __repr__(self):
+        return self.nickname

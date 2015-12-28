@@ -13,6 +13,11 @@
 {% for data in Alldata %}
     <div>
     <h5>{{ data.title }}</h5>
+
+      <div class="chip">
+        Python
+      </div>
+
         <div>
             <pre><code>{{ data.code }}</code></pre>
         </div>
@@ -58,9 +63,16 @@
                 <label for="content"><br>Answer</label>
                 <input type="hidden" name="article" value="{{ data.id }}">
                 <textarea id="content{{ data.id }}" name="answer" class="materialize-textarea" tabindex="1"></textarea>
+                {% if login %}
                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit
                     <i class="material-icons right">send</i>
                 </button>
+                {% else %}
+                <button disabled class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    <i class="material-icons right">send</i>
+                </button>
+                <a href="/user/login">Login User Only!!</a>
+                {% endif %}
             </form>
         </div>
 

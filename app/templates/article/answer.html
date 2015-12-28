@@ -11,7 +11,7 @@
 {% for data in all_answer %}
     <div class="card-panel hoverable">
         <div class="chip">
-            <img src="/img/crong.jpg">{{ data.writer }}
+            <img src="/img/profile/{{ all_profile[data.writer] }}">{{ all_nickname[data.writer] }}
         </div>
         <pre><code>{{ data.content }}</code></pre>
 
