@@ -77,4 +77,4 @@ def show_answer():
         db.session.add(answer)
         db.session.commit()
 
-        return redirect(url_for('main.index'))
+        return redirect(url_for('article.show_answer', article=data['article']))

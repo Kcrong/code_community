@@ -13,7 +13,7 @@
         <textarea id="textarea1" name="content" class="materialize-textarea"></textarea>
 
         <label for="textarea2">Tags</label>
-        <textarea id="textarea2" name="tag" class="materialize-textarea" placeholder="세미콜론 (;) 을 통해 구분합니다. \n최대 5개 까지의 태그를 등록할 수 있습니다. \n python;error;code review;etc.."></textarea>
+        <textarea id="textarea2" name="tag" class="materialize-textarea" placeholder="세미콜론 (;) 을 통해 구분합니다. 최대 5개 까지의 태그를 등록할 수 있습니다. Ex) python;error;code review;etc.."></textarea>
 
 
         <div style="width: 100%; height: auto;" align="right">
@@ -23,13 +23,6 @@
         </div>
     </form>
 
-    <script>
-        var textAreas = document.getElementsByTagName('textarea2');
-
-        Array.prototype.forEach.call(textAreas, function(elem) {
-            elem.placeholder = elem.placeholder.replace(/\\n/g, '\n');
-        });
-    </script>
 
 
 {% endblock %}

@@ -36,7 +36,7 @@ class Answer(db.Model):
 class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     article = db.Column(db.Integer, db.ForeignKey('article.id'))
-    content = db.String(30)
+    content = db.Column(db.String(30))
 
     def __init__(self, article, content):
         self.article = article

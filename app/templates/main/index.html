@@ -14,9 +14,12 @@
     <div>
     <h5>{{ data.title }}</h5>
 
-      <div class="chip">
-        Python
-      </div>
+        {% for tag in tag_data[data.id] %}
+      <a href="/?tag={{ tag.content }}"><div class="chip">
+        {{ tag.content }}
+      </div></a>
+        {% endfor %}
+
 
         <div>
             <pre><code>{{ data.code }}</code></pre>
