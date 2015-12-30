@@ -26,11 +26,22 @@ class Answer(db.Model):
     article = db.Column(db.Integer, db.ForeignKey('article.id'))
     content = db.Column(db.Text)
     writer = db.Column(db.Integer, db.ForeignKey('users.id'))
+    like = db.Column(db.Integer, default=0)
 
     def __init__(self, article, content, writer):
         self.article = article
         self.writer = writer
         self.content = content
+
+
+class Answer_like(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    answer = db.Column(db.Integer)
+    user = db.Column(db.Integer)
+
+    def __init__(self, answer, user):
+        self.answer = answer
+        self.user = user
 
 
 class Tag(db.Model):

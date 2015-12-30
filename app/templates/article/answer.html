@@ -10,8 +10,12 @@
 
 {% for data in all_answer %}
     <div class="card-panel hoverable">
+
         <div class="chip">
             <img src="/img/profile/{{ all_profile[data.writer] }}">{{ all_nickname[data.writer] }}
+        </div>
+        <div>
+            <a href="/article/add_like?answer={{ data.id }}"><span style="color: green"><span style="color: red;">{{ data.like }}</span> 명이 좋아합니다.</span></a>
         </div>
         <pre><code>{{ data.content }}</code></pre>
 

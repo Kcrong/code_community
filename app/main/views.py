@@ -16,6 +16,7 @@ def index():
         login = session['login']
     except KeyError:
         session['login'] = False
+        login = False
 
     try:
         tag = request.args['tag']
