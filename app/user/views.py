@@ -92,7 +92,15 @@ def user_signup():
         u = Users(data['userid'], data['password'], data['nickname'], data['email'], data['job'], filename)
 
         db.session.add(u)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except IntegrityError, e:
+            db.session.rollback()
+            error = e[0].split('for key')[1].split("\'")[1]
+            return render_template('user/signup.html',
+                                   login=True,
+                                   userdata=session,
+                                   error=error + ' is same with other user!')
 
         return redirect(url_for('user.user_login'))
 
