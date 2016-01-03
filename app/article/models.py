@@ -13,6 +13,7 @@ class Article(db.Model):
     answer = db.relationship('Answer', lazy='dynamic', backref='Article')
     writer = db.Column(db.Integer, db.ForeignKey('users.id'))
     tag = db.relationship('Tag', lazy='dynamic', backref='Article')
+    active = db.Column(db.Boolean, default=True)
 
     def __init__(self, title, code, content, writer):
         self.title = title

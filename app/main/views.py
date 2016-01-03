@@ -22,7 +22,7 @@ def index():
         tag = request.args['tag']
     except BadRequestKeyError:
 
-        db_data = db.session.query(Article).order_by(desc(Article.id)).all()
+        db_data = db.session.query(Article).filter_by(active=True).order_by(desc(Article.id)).all()
 
     else:
         all_tag = db.session.query(Tag).filter_by(content=tag).all()
